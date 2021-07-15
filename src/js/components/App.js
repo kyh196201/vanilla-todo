@@ -50,6 +50,8 @@ export default class App {
     });
   }
 
+  validate() {}
+
   render() {
     this.$target.innerHTML = this.template();
   }
