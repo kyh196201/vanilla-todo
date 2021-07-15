@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
@@ -60,5 +61,8 @@ module.exports = {
       filename: 'index.html',
     }),
     new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      API_ENDPOINT: JSON.stringify('http://localhost:3000/'),
+    }),
   ],
 };
