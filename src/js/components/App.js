@@ -1,6 +1,7 @@
 import TodoList from './TodoList';
 import TodoInput from './TodoInput';
 import TodoCount from './TodoCount';
+import * as api from '../api/index.js';
 
 const tag = 'app';
 
@@ -12,13 +13,15 @@ export default class App {
     };
 
     this.validate();
+    this.render();
+    this.mounted();
+  }
+
+  mounted() {
     this.init();
-    this.bindEvents();
   }
 
   init() {
-    this.render();
-
     // TodoInput
     this.$todoInput = new TodoInput({
       $target: this.$target.querySelector('.todo-input-container'),
@@ -48,6 +51,10 @@ export default class App {
         onToggle: this.onToggle.bind(this),
       },
     });
+
+    this.bindEvents();
+
+    this.fetchData();
   }
 
   validate() {}
@@ -89,6 +96,15 @@ export default class App {
     return todoData.length ? todoData.filter(todo => todo.isCompleted).length : 0;
   }
 
+  // Api
+  async fetchData() {
+    const data = await api.fetchTodo();
+
+    this.setState({
+      todoData: data,
+    });
+  }
+
   //   Events
   bindEvents() {
     this.$target.addEventListener('@delete-all', this.handleDeleteAll.bind(this), false);
@@ -111,11 +127,23 @@ export default class App {
     }
   }
 
-  onSubmit(inputText) {
-    this.addTodo(inputText);
+  onSubmit(title) {
+    this.createTodoItem(title);
   }
 
-  addTodo(inputText) {
+  async createTodoItem(title) {
+    const todoData = {
+      title,
+      isCompleted: false,
+    };
+
+    const result = await api.createTodo(todoData);
+
+    this.fetchData();
+  }
+
+  // TODO 삭제
+  addTodo(title) {
     const {todoData} = this.state;
 
     const id = Math.max(0, ...todoData.map(todo => todo.id)) + 1;
@@ -124,7 +152,7 @@ export default class App {
       ...todoData,
       {
         id,
-        text: inputText,
+        title,
         isCompleted: false,
       },
     ];
@@ -134,48 +162,20 @@ export default class App {
     });
   }
 
-  onDelete(id) {
-    const index = this.findTodoIndexById(id);
+  async onDelete(id) {
+    const result = await api.deleteTodo(id);
 
-    if (index < 0) return;
-
-    const {todoData} = this.state;
-
-    const newData = [...todoData.slice(0, index), ...todoData.slice(index + 1)];
-
-    this.setState({
-      todoData: newData,
-    });
+    this.fetchData();
   }
 
-  onToggle(id) {
+  async onToggle(id) {
     const {todoData} = this.state;
-    const index = this.findTodoIndexById(id);
+    const todoItem = todoData.find(todo => todo.id === id);
 
-    if (index < 0) return;
-
-    const todoItem = todoData[index];
-
-    const newData = [
-      ...todoData.slice(0, index),
-      {
-        id: todoItem.id,
-        text: todoItem.text,
-        isCompleted: !todoItem.isCompleted,
-      },
-      ...todoData.slice(index + 1),
-    ];
-
-    this.setState({
-      todoData: newData,
+    const result = await api.updateTodo(id, {
+      isCompleted: !todoItem.isCompleted,
     });
-  }
 
-  findTodoIndexById(id) {
-    const {todoData} = this.state;
-
-    if (!todoData.length || id === null || id === undefined) return -1;
-
-    return todoData.findIndex(todo => todo.id === id);
+    this.fetchData();
   }
 }

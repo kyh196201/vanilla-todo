@@ -20,6 +20,12 @@
 npm install
 ```
 
+### Json server 실행
+```
+// json 파일 생성한 디렉토리 (src/js/db)
+json-server --watch [파일명].json
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run start
