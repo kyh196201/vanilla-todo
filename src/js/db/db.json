@@ -1,3 +1,14 @@
 {
-  "todo": [{"id": 1, "title": "Javascript 공부하기", "isCompleted": false}]
+  "todo": [
+    {
+      "id": 1,
+      "title": "Javascript 공부하기",
+      "isCompleted": true
+    },
+    {
+      "title": "타이틀",
+      "isCompleted": true,
+      "id": 2
+    }
+  ]
 }
