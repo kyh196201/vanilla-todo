@@ -121,9 +121,10 @@ export default class App {
 
   handleDeleteAll() {
     if (window.confirm('전체 삭제하시겠습니까???')) {
-      this.setState({
-        todoData: [],
-      });
+      alert('개발 중');
+      // this.setState({
+      //   todoData: [],
+      // });
     }
   }
 

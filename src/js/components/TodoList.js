@@ -21,17 +21,17 @@ export default class TodoList extends Component {
   }
 
   todoTemplate(todo) {
-    const {text, isCompleted, id} = todo;
+    const {title, isCompleted, id} = todo;
 
     const $radio = isCompleted
       ? `<input type="checkbox" class="todo-item__toggle-btn" checked>`
       : `<input type="checkbox" class="todo-item__toggle-btn">`;
-    const $text = isCompleted ? `<s>${text}</s>` : text;
+    const $title = isCompleted ? `<s>${title}</s>` : title;
 
     return `
       <li class="todo-item" data-id="${id}">
         ${$radio}
-        <div class="todo-item__text">${$text}</div>
+        <div class="todo-item__title">${$title}</div>
         <button type="button" class="todo-item__delete-btn">&times;</button>
       </li>`;
   }

@@ -62,7 +62,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
-      API_ENDPOINT: JSON.stringify('http://localhost:3000/'),
+      API_URL: JSON.stringify('http://localhost:3000/'),
     }),
   ],
 };
