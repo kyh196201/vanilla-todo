@@ -10,10 +10,14 @@ export default class Component {
     this.bindEvents();
   }
 
-  setup() {}
+  setup() {
+    this.createElement();
+  }
+
+  createElement() {}
 
   render() {
-    this.$target.innerHTML = this.template();
+    this.$el.innerHTML = this.template();
   }
 
   mounted() {}

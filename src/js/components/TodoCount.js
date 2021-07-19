@@ -1,6 +1,14 @@
 import Component from '../core/Component';
 
 export default class TodoCount extends Component {
+  createElement() {
+    const $el = document.createElement('section');
+    $el.className = 'todo-count';
+
+    this.$el = $el;
+    this.$target.appendChild($el);
+  }
+
   template() {
     const {total, completed} = this.state;
     const active = total - completed;

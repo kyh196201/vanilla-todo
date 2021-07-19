@@ -10,21 +10,29 @@ export default class App {
     this.$target = $target;
     this.state = {
       todoData: [],
+      isLoading: false,
+      tab: '',
     };
 
-    this.validate();
-    this.render();
-    this.mounted();
-  }
-
-  mounted() {
     this.init();
   }
 
+  createElement() {
+    const $el = document.createElement('div');
+    $el.className = 'todo-app';
+
+    this.$el = $el;
+    this.$target.appendChild($el);
+  }
+
   init() {
+    this.validate();
+    this.createElement();
+    this.bindEvents();
+
     // TodoInput
     this.$todoInput = new TodoInput({
-      $target: this.$target.querySelector('.todo-input-container'),
+      $target: this.$el,
       state: {},
       $props: {
         onSubmit: this.onSubmit.bind(this),
@@ -33,7 +41,7 @@ export default class App {
 
     // TodoCount
     this.$todoCount = new TodoCount({
-      $target: this.$target.querySelector('.todo-count'),
+      $target: this.$el,
       state: {
         total: this.totalCount,
         completed: this.completedCount,
@@ -42,7 +50,7 @@ export default class App {
 
     // TodoList
     this.$todoList = new TodoList({
-      $target: this.$target.querySelector('.todo-list'),
+      $target: this.$el,
       state: {
         data: this.state.todoData,
       },
@@ -52,16 +60,10 @@ export default class App {
       },
     });
 
-    this.bindEvents();
-
     this.fetchData();
   }
 
   validate() {}
-
-  render() {
-    this.$target.innerHTML = this.template();
-  }
 
   setState(newState) {
     this.state = {...this.state, ...newState};
@@ -74,15 +76,6 @@ export default class App {
       total: this.totalCount,
       completed: this.completedCount,
     });
-  }
-
-  template() {
-    return `
-	  	<div class="todo-input-container"></div>
-      <button type="button" class="delete-all">Delete All</button>
-      <div class="todo-count"></div>
-      <ul class="todo-list"></ul>
-	  `;
   }
 
   // Getters
@@ -107,14 +100,14 @@ export default class App {
 
   //   Events
   bindEvents() {
-    this.$target.addEventListener('@delete-all', this.handleDeleteAll.bind(this), false);
+    this.$el.addEventListener('@delete-all', this.handleDeleteAll.bind(this), false);
 
-    this.$target.addEventListener('click', e => {
+    this.$el.addEventListener('click', e => {
       const $eventTarget = e.target;
 
       if ($eventTarget.classList.contains('delete-all')) {
         const deleteAllEvent = new CustomEvent('@delete-all');
-        this.$target.dispatchEvent(deleteAllEvent);
+        this.$el.dispatchEvent(deleteAllEvent);
       }
     });
   }
@@ -141,26 +134,6 @@ export default class App {
     const result = await api.createTodo(todoData);
 
     this.fetchData();
-  }
-
-  // TODO 삭제
-  addTodo(title) {
-    const {todoData} = this.state;
-
-    const id = Math.max(0, ...todoData.map(todo => todo.id)) + 1;
-
-    const newTodoData = [
-      ...todoData,
-      {
-        id,
-        title,
-        isCompleted: false,
-      },
-    ];
-
-    this.setState({
-      todoData: newTodoData,
-    });
   }
 
   async onDelete(id) {

@@ -6,6 +6,23 @@ export default class TodoList extends Component {
   setup() {
     this.onToggle = this.$props.onToggle;
     this.onDelete = this.$props.onDelete;
+
+    this.createElement();
+  }
+
+  createElement() {
+    const $el = document.createElement('section');
+    $el.className = 'todo-list-container';
+
+    const $list = document.createElement('ul');
+    $list.className = 'todo-list';
+
+    $el.appendChild($list);
+
+    this.$list = $list;
+    this.$el = $el;
+
+    this.$target.appendChild($el);
   }
 
   template() {
@@ -18,6 +35,10 @@ export default class TodoList extends Component {
           })
           .join('')
       : '할 일을 입력해주세요 😊';
+  }
+
+  render() {
+    this.$list.innerHTML = this.template();
   }
 
   todoTemplate(todo) {

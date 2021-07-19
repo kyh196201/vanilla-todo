@@ -5,11 +5,22 @@ const tag = 'todo-input';
 export default class TodoInput extends Component {
   setup() {
     this.onSubmit = this.$props.onSubmit;
+
+    this.createElement();
+  }
+
+  createElement() {
+    const $el = document.createElement('section');
+    $el.className = 'todo-form';
+    $el.innerHTML = this.template();
+
+    this.$el = $el;
+    this.$target.appendChild($el);
   }
 
   template() {
     return `
-		<form class="todo-form">
+		<form>
 			<input type="text" class="todo-input" placeholder="todo..">
 			<button type="submit" class="todo-submit-btn">Submit</button>
 		</form>
@@ -17,7 +28,7 @@ export default class TodoInput extends Component {
   }
 
   bindEvents() {
-    const $form = this.$target.querySelector('.todo-form');
+    const $form = this.$el.querySelector('form');
 
     $form.addEventListener('submit', e => {
       this.handleSubmit(e);
@@ -27,21 +38,21 @@ export default class TodoInput extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    const $input = this.$target.querySelector('.todo-input');
-    const inputText = $input.value.trim();
+    const $input = this.$el.querySelector('.todo-input');
+    const title = $input.value.trim();
 
-    if (!inputText) {
+    if (!title) {
       alert('할 일을 입력해주세요!');
       return false;
     }
 
-    this.onSubmit(inputText);
+    this.onSubmit(title);
 
     this.clearInput();
   }
 
   clearInput() {
-    const $input = this.$target.querySelector('.todo-input');
+    const $input = this.$el.querySelector('.todo-input');
 
     $input.value = '';
   }
