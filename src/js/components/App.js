@@ -1,6 +1,7 @@
 import TodoList from './TodoList';
 import TodoInput from './TodoInput';
 import TodoCount from './TodoCount';
+import Tabs from './Tabs';
 import * as api from '../api/index.js';
 
 const tag = 'app';
@@ -11,7 +12,8 @@ export default class App {
     this.state = {
       todoData: [],
       isLoading: false,
-      tab: '',
+      activeTab: 'list',
+      tabs: ['list', 'calendar'],
     };
 
     this.init();
@@ -29,6 +31,14 @@ export default class App {
     this.validate();
     this.createElement();
     this.bindEvents();
+
+    this.$tabs = new Tabs({
+      $target: this.$el,
+      state: {
+        tabs: this.state.tabs,
+        activeTab: this.activeTab,
+      },
+    });
 
     // TodoInput
     this.$todoInput = new TodoInput({
@@ -76,6 +86,10 @@ export default class App {
       total: this.totalCount,
       completed: this.completedCount,
     });
+
+    this.$tabs.setState({
+      activeTab: this.activeTab,
+    });
   }
 
   // Getters
@@ -87,6 +101,10 @@ export default class App {
     const {todoData} = this.state;
 
     return todoData.length ? todoData.filter(todo => todo.isCompleted).length : 0;
+  }
+
+  get activeTab() {
+    return this.state.activeTab;
   }
 
   // Api
