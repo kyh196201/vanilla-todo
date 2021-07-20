@@ -6,8 +6,6 @@ export default class TodoList extends Component {
   setup() {
     this.onToggle = this.$props.onToggle;
     this.onDelete = this.$props.onDelete;
-
-    this.createElement();
   }
 
   createElement() {

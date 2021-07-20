@@ -1,11 +1,12 @@
 export default class Component {
-  constructor({$target, state, $props}) {
-    this.$target = $target;
-    this.state = state;
-    this.$props = $props || {};
+  constructor(params = {}) {
+    this.$target = params.$target;
+    this.state = params.state || {};
+    this.$props = params.$props || {};
 
     this.validate();
     this.setup();
+    this.createElement();
     this.render();
     this.bindEvents();
   }

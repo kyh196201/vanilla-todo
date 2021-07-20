@@ -5,8 +5,6 @@ const tag = 'todo-input';
 export default class TodoInput extends Component {
   setup() {
     this.onSubmit = this.$props.onSubmit;
-
-    this.createElement();
   }
 
   createElement() {
