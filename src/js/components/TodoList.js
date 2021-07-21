@@ -28,10 +28,10 @@ export default class TodoList extends Component {
   }
 
   template() {
-    const {data} = this.state;
+    const {todoData} = this.$store.state;
 
-    return data.length
-      ? data
+    return todoData.length
+      ? todoData
           .map(todo => {
             return this.todoTemplate(todo);
           })
@@ -60,7 +60,7 @@ export default class TodoList extends Component {
   }
 
   bindEvents() {
-    this.$target.addEventListener('click', e => {
+    this.$el.addEventListener('click', e => {
       const $target = e.target;
       const $todoItem = $target.closest('.todo-item');
 

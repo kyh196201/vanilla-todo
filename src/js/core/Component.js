@@ -9,6 +9,8 @@ export default class Component {
     this.render = this.render || function () {};
 
     if (params.store instanceof Store) {
+      this.$store = params.store;
+
       params.store.events.subscribe('stateChange', () => {
         this.render.call(this);
       });

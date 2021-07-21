@@ -2,8 +2,13 @@
   "todo": [
     {
       "title": "1",
-      "isCompleted": false,
+      "isCompleted": true,
       "id": 1
+    },
+    {
+      "title": "123",
+      "isCompleted": false,
+      "id": 2
     }
   ]
 }
