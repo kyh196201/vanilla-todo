@@ -72,9 +72,15 @@ export default class TodoList extends Component {
         this.onToggle(id);
       } else if ($target.classList.contains('todo-item__delete-btn')) {
         if (window.confirm('삭제하시겠습니까?')) {
-          this.onDelete(id);
+          // this.onDelete(id);
+          this.handleDeleteItem(id);
         }
       }
     });
+  }
+
+  // Actions
+  handleDeleteItem(id) {
+    this.$store.dispatch('deleteItem', id);
   }
 }

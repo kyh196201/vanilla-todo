@@ -1,17 +1,12 @@
 import Store from './store';
+import state from './state';
+import mutations from './mutations';
+import actions from './actions';
 
 const store = new Store({
-  state: {
-    todoData: [
-      {
-        title: '1',
-        isCompleted: false,
-        id: 1,
-      },
-    ],
-  },
-  mutations: {},
-  actions: {},
+  state,
+  mutations,
+  actions,
 });
 
 export default store;
