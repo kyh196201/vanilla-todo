@@ -8,6 +8,9 @@
 12.16.3
 ```
 
+## 1_basic 브랜치
+> 상태 관리를 적용하지 않은 브랜치입니다.
+
 ## 참고
 - [Vanilla Javascript로 컴포넌트 만들기](https://junilhwang.github.io/TIL/Javascript/Design/Vanilla-JS-Component/).
 - [gitIgnore](https://gist.github.com/andreasonny83/b24e38b7772a3ea362d8e8d238d5a7bc).
