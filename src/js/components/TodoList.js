@@ -3,6 +3,10 @@ import Component from '../core/Component';
 const tag = 'todo-list';
 
 export default class TodoList extends Component {
+  constructor(params) {
+    super(params);
+  }
+
   setup() {
     this.onToggle = this.$props.onToggle;
     this.onDelete = this.$props.onDelete;

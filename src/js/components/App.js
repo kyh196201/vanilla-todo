@@ -3,12 +3,18 @@ import TodoInput from './TodoInput';
 import TodoCount from './TodoCount';
 import Tabs from './Tabs';
 import * as api from '../api/index.js';
+import Store from '../store/store';
 
 const tag = 'app';
 
 export default class App {
-  constructor($target) {
-    this.$target = $target;
+  constructor(params) {
+    this.$target = params.$target;
+
+    if (params.store instanceof Store) {
+      this.$store = params.store;
+    }
+
     this.state = {
       todoData: [],
       isLoading: false,
@@ -30,8 +36,15 @@ export default class App {
   init() {
     this.validate();
     this.createElement();
+    this.render();
     this.bindEvents();
+    this.fetchData();
+  }
 
+  validate() {}
+
+  // 컴포넌트 렌더링
+  render() {
     this.$tabs = new Tabs({
       $target: this.$el,
       state: {
@@ -61,6 +74,7 @@ export default class App {
     // TodoList
     this.$todoList = new TodoList({
       $target: this.$el,
+      store: this.$store || null,
       state: {
         data: this.state.todoData,
       },
@@ -69,11 +83,7 @@ export default class App {
         onToggle: this.onToggle.bind(this),
       },
     });
-
-    this.fetchData();
   }
-
-  validate() {}
 
   setState(newState) {
     this.state = {...this.state, ...newState};

@@ -1,7 +1,7 @@
 import Pubsub from '../lib/pubsub';
 
 export default class Store {
-  constructor(params) {
+  constructor(params = {}) {
     let self = this;
 
     self.actions = {};

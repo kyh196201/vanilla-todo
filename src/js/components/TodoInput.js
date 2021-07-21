@@ -3,6 +3,10 @@ import Component from '../core/Component';
 const tag = 'todo-input';
 
 export default class TodoInput extends Component {
+  constructor(params) {
+    super(params);
+  }
+
   setup() {
     this.onSubmit = this.$props.onSubmit;
   }

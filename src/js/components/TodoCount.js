@@ -1,6 +1,10 @@
 import Component from '../core/Component';
 
 export default class TodoCount extends Component {
+  constructor(params) {
+    super(params);
+  }
+
   createElement() {
     const $el = document.createElement('section');
     $el.className = 'todo-count';

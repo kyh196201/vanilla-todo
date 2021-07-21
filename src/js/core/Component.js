@@ -1,8 +1,18 @@
+import Store from '../store/store.js';
+
 export default class Component {
   constructor(params = {}) {
     this.$target = params.$target;
     this.state = params.state || {};
     this.$props = params.$props || {};
+
+    this.render = this.render || function () {};
+
+    if (params.store instanceof Store) {
+      params.store.events.subscribe('stateChange', () => {
+        this.render.call(this);
+      });
+    }
 
     this.validate();
     this.setup();
@@ -11,17 +21,13 @@ export default class Component {
     this.bindEvents();
   }
 
-  setup() {
-    this.createElement();
-  }
+  setup() {}
 
   createElement() {}
 
   render() {
     this.$el.innerHTML = this.template();
   }
-
-  mounted() {}
 
   validate() {}
 
