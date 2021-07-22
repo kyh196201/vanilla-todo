@@ -1,10 +1,7 @@
 export default {
   setTodos(state, todos = []) {
-    const newState = {
-      ...state,
-      todoData: todos,
-    };
+    state.todoData = todos;
 
-    return newState;
+    return state;
   },
 };

@@ -67,8 +67,9 @@ export default class Store {
 
     self.status = 'mutation';
 
-    const newState = self.mutations[mutationKey](self.state, payload);
-    self.state = Object.assign(self.state, newState);
+    // const newState = self.mutations[mutationKey](self.state, payload);
+    // self.state = Object.assign(self.state, newState);
+    self.mutations[mutationKey](self.state, payload);
 
     return true;
   }
