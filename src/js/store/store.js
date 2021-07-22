@@ -60,7 +60,7 @@ export default class Store {
   commit(mutationKey, payload) {
     let self = this;
 
-    if (!self.mutations[mutationKey] !== 'function') {
+    if (typeof self.mutations[mutationKey] !== 'function') {
       console.error(`Mutation ${mutationKey} does not exist.`);
       return false;
     }

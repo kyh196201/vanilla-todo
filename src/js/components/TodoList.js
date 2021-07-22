@@ -81,6 +81,10 @@ export default class TodoList extends Component {
 
   // Actions
   handleDeleteItem(id) {
-    this.$store.dispatch('deleteItem', id);
+    try {
+      this.$store.dispatch('deleteTodo', id);
+    } catch (error) {
+      console.error('error in handleDelteItem', error.message);
+    }
   }
 }

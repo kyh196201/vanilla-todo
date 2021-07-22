@@ -33,12 +33,12 @@ export default class App {
     this.$target.appendChild($el);
   }
 
-  init() {
+  async init() {
     this.validate();
     this.createElement();
+    await this.fetchData();
     this.render();
     this.bindEvents();
-    this.fetchData();
   }
 
   validate() {}
@@ -56,6 +56,7 @@ export default class App {
     // TodoInput
     this.$todoInput = new TodoInput({
       $target: this.$el,
+      store: this.$store || null,
       state: {},
       $props: {
         onSubmit: this.onSubmit.bind(this),
@@ -119,11 +120,7 @@ export default class App {
 
   // Api
   async fetchData() {
-    const data = await api.fetchTodo();
-
-    this.setState({
-      todoData: data,
-    });
+    return await this.$store.dispatch('fetchTodos');
   }
 
   //   Events
@@ -142,10 +139,7 @@ export default class App {
 
   handleDeleteAll() {
     if (window.confirm('전체 삭제하시겠습니까???')) {
-      alert('개발 중');
-      // this.setState({
-      //   todoData: [],
-      // });
+      alert('개발 중인 기능입니다.');
     }
   }
 

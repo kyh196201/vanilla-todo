@@ -1,9 +1,6 @@
 export default {
-  todoData: [
-    {
-      title: '1',
-      isCompleted: false,
-      id: 1,
-    },
-  ],
+  todoData: [],
+  loading: false,
+  activeTab: 'list',
+  tabs: ['list', 'calendar'],
 };
