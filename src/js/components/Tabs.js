@@ -19,11 +19,11 @@ export default class Tabs extends Component {
     const isActive = tab === this.$store.state.activeTab;
 
     const $radio = isActive
-      ? `<input type="radio" name="tab" value="${tab}" checked>`
-      : `<input type="radio" name="tab" value="${tab}">`;
+      ? `<input type="radio" name="tab" class="tab-radio" value="${tab}" checked>`
+      : `<input type="radio" name="tab" class="tab-radio" value="${tab}">`;
 
     return `
-		<li class="tab-item">
+		<li class="tab-item ${isActive ? 'active' : ''}">
 			<label>
 				${$radio}
 				<span class="tab-title">${tab}</span>

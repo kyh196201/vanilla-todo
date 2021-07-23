@@ -1,14 +1,3 @@
 {
-  "todo": [
-    {
-      "title": "5",
-      "isCompleted": true,
-      "id": 12
-    },
-    {
-      "title": "f",
-      "isCompleted": true,
-      "id": 15
-    }
-  ]
+  "todo": []
 }

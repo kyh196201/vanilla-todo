@@ -1,7 +1,5 @@
 import Component from '../core/Component';
 
-const tag = 'todo-input';
-
 export default class TodoInput extends Component {
   constructor(params) {
     super(params);
@@ -19,8 +17,10 @@ export default class TodoInput extends Component {
   template() {
     return `
 		<form>
-			<input type="text" class="todo-input" placeholder="todo..">
-			<button type="submit" class="todo-submit-btn">Submit</button>
+      <div class="todo-input-wrapper">
+        <input type="text" class="todo-input" placeholder="todo..">
+        <button type="submit" class="todo-submit-btn">&plus;</button>
+      </div>
 		</form>
 	`;
   }

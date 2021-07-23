@@ -1,0 +1,38 @@
+.todo-tab {
+	display: flex;
+
+	.tab {
+		&-item {
+			width: 50%;
+			background-color: $tab-background-color;
+			border-bottom: 2px solid $tab-border-color;
+			font-size: 1.6rem;
+
+			label {
+				width: 100%;
+			}
+
+			&.active {
+				border-bottom: none;
+				background: $white;
+			}
+
+			&:first-child {
+				width: calc(50% + 2px);
+				border-right: 2px solid $tab-border-color;
+			}
+		}
+
+		&-radio {
+			display: none;
+		}
+
+		&-title {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 1.5em;
+			font-size: 1em;
+		}
+	}
+}

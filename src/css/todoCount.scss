@@ -1,0 +1,16 @@
+.todo {
+	&-count {
+		display: flex;
+		margin-bottom: 2rem;
+		font-size: 1.6rem;
+		color: $light-black-color;
+
+		.total-count {
+			font-size: 1.1em;
+		}
+
+		.completed-count {
+			font-size: 1.1em;
+		}
+	}
+}
