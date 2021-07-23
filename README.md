@@ -8,12 +8,20 @@
 12.16.3
 ```
 
+## 브랜치
+```
+바닐라 스크립트로 작성한 Store 연동
+```
+
 ## 참고
 - [Vanilla Javascript로 컴포넌트 만들기](https://junilhwang.github.io/TIL/Javascript/Design/Vanilla-JS-Component/).
 - [gitIgnore](https://gist.github.com/andreasonny83/b24e38b7772a3ea362d8e8d238d5a7bc).
-- [json-server](https://github.com/typicode/json-server).
 - [프론트엔드 개발 환경의 이해](https://jeonghwan-kim.github.io/series/2019/12/10/frontend-dev-env-webpack-basic.html#2-%EC%97%94%ED%8A%B8%EB%A6%AC%EC%95%84%EC%9B%83%ED%92%8B).
 - [캡틴판교 - 웹팩 핸드북](https://joshua1988.github.io/webpack-guide/guide.html).
+
+## 라이브러리
+- [pretty checkbox](https://lokesh-coder.github.io/pretty-checkbox/)
+- [json-server](https://github.com/typicode/json-server).
 
 ## Project setup
 ```
