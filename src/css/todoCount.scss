@@ -5,12 +5,10 @@
 		font-size: 1.6rem;
 		color: $light-black-color;
 
-		.total-count {
-			font-size: 1.1em;
-		}
-
+		.total-count,
 		.completed-count {
 			font-size: 1.1em;
+			font-weight: bold;
 		}
 	}
 }
