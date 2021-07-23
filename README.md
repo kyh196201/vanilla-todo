@@ -22,8 +22,9 @@
 - [캡틴판교 - 웹팩 핸드북](https://joshua1988.github.io/webpack-guide/guide.html).
 
 ## 라이브러리
-- [pretty checkbox](https://lokesh-coder.github.io/pretty-checkbox/)
+- [pretty checkbox](https://lokesh-coder.github.io/pretty-checkbox/).
 - [json-server](https://github.com/typicode/json-server).
+- [font-awesome](https://fontawesome.com/).
 
 ## Project setup
 ```

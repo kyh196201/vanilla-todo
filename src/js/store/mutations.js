@@ -4,4 +4,10 @@ export default {
 
     return state;
   },
+
+  changeTab(state, tabName) {
+    state.activeTab = tabName;
+
+    return state;
+  },
 };

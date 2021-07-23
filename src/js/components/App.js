@@ -10,14 +10,11 @@ export default class App {
 
     if (params.store instanceof Store) {
       this.$store = params.store;
-    }
 
-    this.state = {
-      todoData: [],
-      isLoading: false,
-      activeTab: 'list',
-      tabs: ['list', 'calendar'],
-    };
+      this.$store.events.subscribe('stateChange', () => {
+        this.render.call(this);
+      });
+    }
 
     this.init();
   }
@@ -32,10 +29,16 @@ export default class App {
     const $body = document.createElement('section');
     $body.className = 'todo-body';
 
+    // todo-content
     const $todoContent = document.createElement('section');
     $todoContent.className = 'todo-content';
 
+    // calendar-container
+    const $calendarContainer = document.createElement('section');
+    $calendarContainer.className = 'calendar-container';
+
     $body.appendChild($todoContent);
+    $body.appendChild($calendarContainer);
 
     $el.appendChild($header);
     $el.appendChild($body);
@@ -43,6 +46,7 @@ export default class App {
     this.$header = $header;
     this.$body = $body;
     this.$todoContent = $todoContent;
+    this.$calendarContainer = $calendarContainer;
     this.$el = $el;
     this.$target.appendChild($el);
   }
@@ -51,14 +55,15 @@ export default class App {
     this.validate();
     this.createElement();
     await this.fetchData();
+    this.initChildComponents();
     this.render();
     this.bindEvents();
   }
 
   validate() {}
 
-  // 컴포넌트 렌더링
-  render() {
+  // 컴포넌트 생성
+  initChildComponents() {
     this.$tabs = new Tabs({
       $target: this.$header,
       store: this.$store || null,
@@ -84,29 +89,25 @@ export default class App {
     });
   }
 
-  setState(newState) {
-    this.state = {...this.state, ...newState};
-
-    this.$todoList.setState({
-      data: this.state.todoData,
-    });
-
-    this.$todoCount.setState({
-      total: this.totalCount,
-      completed: this.completedCount,
-    });
-
-    this.$tabs.setState({
-      activeTab: this.activeTab,
-    });
-  }
-
   // Api
   async fetchData() {
     return await this.$store.dispatch('fetchTodos');
   }
 
-  //   Events
+  render() {
+    const {activeTab} = this.$store.state;
+
+    this.$todoContent.classList.remove('hide');
+    this.$calendarContainer.classList.remove('hide');
+
+    if (activeTab === 'list') {
+      this.$calendarContainer.classList.add('hide');
+    } else if (activeTab === 'calendar') {
+      this.$todoContent.classList.add('hide');
+    }
+  }
+
+  // Events
   bindEvents() {
     this.$el.addEventListener('@delete-all', this.handleDeleteAll.bind(this), false);
 

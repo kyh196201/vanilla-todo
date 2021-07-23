@@ -38,6 +38,20 @@ export default class Tabs extends Component {
 	`;
   }
 
+  bindEvents() {
+    this.$el.addEventListener('change', e => {
+      const $target = e.target;
+
+      if ($target.tagName !== 'INPUT') return;
+
+      const tabName = $target.value;
+
+      if (!tabName) return;
+
+      this.$store.dispatch('changeTab', tabName);
+    });
+  }
+
   getTabIcon(tab) {
     return tabIcons[tab];
   }

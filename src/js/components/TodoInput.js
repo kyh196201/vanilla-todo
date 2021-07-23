@@ -19,7 +19,9 @@ export default class TodoInput extends Component {
 		<form>
       <div class="todo-input-wrapper">
         <input type="text" class="todo-input" placeholder="todo..">
-        <button type="submit" class="todo-submit-btn">&plus;</button>
+        <button type="submit" class="todo-submit-btn">
+          <i class="fas fa-plus"></i>
+        </button>
       </div>
 		</form>
 	`;

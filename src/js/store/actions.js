@@ -27,4 +27,9 @@ export default {
 
     return await context.dispatch('fetchTodos');
   },
+
+  //
+  changeTab(context, tab) {
+    context.commit('changeTab', tab);
+  },
 };
