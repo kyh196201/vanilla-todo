@@ -2,10 +2,7 @@ import TodoList from './TodoList';
 import TodoInput from './TodoInput';
 import TodoCount from './TodoCount';
 import Tabs from './Tabs';
-import * as api from '../api/index.js';
 import Store from '../store/store';
-
-const tag = 'app';
 
 export default class App {
   constructor(params) {
@@ -29,6 +26,17 @@ export default class App {
     const $el = document.createElement('div');
     $el.className = 'todo-app';
 
+    const $header = document.createElement('header');
+    $header.className = 'todo-header';
+
+    const $body = document.createElement('section');
+    $body.className = 'todo-body';
+
+    $el.appendChild($header);
+    $el.appendChild($body);
+
+    this.$header = $header;
+    this.$body = $body;
     this.$el = $el;
     this.$target.appendChild($el);
   }
@@ -46,26 +54,26 @@ export default class App {
   // 컴포넌트 렌더링
   render() {
     this.$tabs = new Tabs({
-      $target: this.$el,
+      $target: this.$header,
       store: this.$store || null,
     });
 
     // TodoInput
     this.$todoInput = new TodoInput({
-      $target: this.$el,
+      $target: this.$body,
       store: this.$store || null,
       isStable: true,
     });
 
     // TodoCount
     this.$todoCount = new TodoCount({
-      $target: this.$el,
+      $target: this.$body,
       store: this.$store || null,
     });
 
     // TodoList
     this.$todoList = new TodoList({
-      $target: this.$el,
+      $target: this.$body,
       store: this.$store || null,
     });
   }

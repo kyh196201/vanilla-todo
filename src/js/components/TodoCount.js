@@ -15,11 +15,12 @@ export default class TodoCount extends Component {
 
   template() {
     return `
-		<div class="todo-total">
-			Total: <span class="total-count">${this.total}</span>
-		</div>
-		<div class="todo-completed">
-			Completed: <span class="completed-count">${this.completed}</span>
+		<div class="todo-count__content">
+      😊 You have
+			<span class="total-count">${this.total}</span>
+      things todo and you've done
+			<span class="completed-count">${this.completed}</span>
+      things.
 		</div>
 	`;
   }

@@ -1,0 +1,41 @@
+.todo {
+	&-form {
+		margin-bottom: 2rem;
+	}
+
+	&-input {
+		flex: 1;
+		margin-right: 1rem;
+		padding: 1rem 0.5rem;
+		height: 4rem;
+		font-size: 1.6rem;
+		color: $light-black-color;
+		border: 0.15rem solid #ddd;
+		border-radius: 0.4rem;
+		transition: border-color 0.3s;
+
+		&:focus,
+		&:active {
+			border-width: 0.2rem;
+			border-color: $main-color;
+
+			// https://stackoverflow.com/questions/1457849/how-to-remove-the-border-highlight-on-an-input-text-element
+			outline-width: 0;
+		}
+
+		&-wrapper {
+			display: flex;
+		}
+	}
+
+	&-submit-btn {
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 4rem;
+		width: 4rem;
+		font-size: 4rem;
+		color: $main-color;
+	}
+}

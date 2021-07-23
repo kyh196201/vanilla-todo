@@ -3,7 +3,7 @@ import 'regenerator-runtime/runtime';
 import App from './components/App.js';
 import store from './store/index.js';
 
-import '../css/styles.scss';
+import '../css/_index.scss';
 
 window.addEventListener('DOMContentLoaded', e => {
   const $app = new App({

@@ -31,7 +31,7 @@ export default class TodoList extends Component {
             return this.todoTemplate(todo);
           })
           .join('')
-      : '할 일을 입력해주세요 😊';
+      : '<li class="todo-item todo-item--empty">할 일을 입력해주세요 😉</li>';
   }
 
   render() {
@@ -39,19 +39,36 @@ export default class TodoList extends Component {
   }
 
   todoTemplate(todo) {
-    const {title, isCompleted, id} = todo;
+    const {id} = todo;
 
-    const $radio = isCompleted
-      ? `<input type="checkbox" class="todo-item__toggle-btn" checked>`
-      : `<input type="checkbox" class="todo-item__toggle-btn">`;
-    const $title = isCompleted ? `<s>${title}</s>` : title;
+    const $checkbox = this.checkboxTemplate(todo);
 
     return `
       <li class="todo-item" data-id="${id}">
-        ${$radio}
-        <div class="todo-item__title">${$title}</div>
+        ${$checkbox}
         <button type="button" class="todo-item__delete-btn">&times;</button>
       </li>`;
+  }
+
+  checkboxTemplate({title, isCompleted}) {
+    const $checkbox = isCompleted
+      ? `<input type="checkbox" class="todo-item__checkbox" checked>`
+      : `<input type="checkbox" class="todo-item__checkbox" />`;
+
+    const $title = isCompleted ? `<strike>${title}</strike>` : title;
+
+    return `
+      <div class="todo-item__checkbox-wrapper pretty p-default">
+        ${$checkbox}
+        <div class="state p-danger">
+            <label>
+              <span class="todo-item__title">
+                ${$title}
+              </span>
+            </label>
+        </div>
+      </div>
+    `;
   }
 
   bindEvents() {
@@ -63,7 +80,7 @@ export default class TodoList extends Component {
 
       const id = parseInt($todoItem.dataset.id);
 
-      if ($target.classList.contains('todo-item__toggle-btn')) {
+      if ($target.classList.contains('todo-item__checkbox')) {
         this.handleToggleTodo(id);
       } else if ($target.classList.contains('todo-item__delete-btn')) {
         if (window.confirm('삭제하시겠습니까?')) {
