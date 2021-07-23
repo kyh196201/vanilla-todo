@@ -7,10 +7,6 @@ export default class TodoInput extends Component {
     super(params);
   }
 
-  setup() {
-    this.onSubmit = this.$props.onSubmit;
-  }
-
   createElement() {
     const $el = document.createElement('section');
     $el.className = 'todo-form';

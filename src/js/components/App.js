@@ -47,10 +47,7 @@ export default class App {
   render() {
     this.$tabs = new Tabs({
       $target: this.$el,
-      state: {
-        tabs: this.state.tabs,
-        activeTab: this.activeTab,
-      },
+      store: this.$store || null,
     });
 
     // TodoInput
@@ -58,33 +55,18 @@ export default class App {
       $target: this.$el,
       store: this.$store || null,
       isStable: true,
-      state: {},
-      $props: {
-        onSubmit: this.onSubmit.bind(this),
-      },
     });
 
     // TodoCount
     this.$todoCount = new TodoCount({
       $target: this.$el,
       store: this.$store || null,
-      state: {
-        total: this.totalCount,
-        completed: this.completedCount,
-      },
     });
 
     // TodoList
     this.$todoList = new TodoList({
       $target: this.$el,
       store: this.$store || null,
-      state: {
-        data: this.state.todoData,
-      },
-      $props: {
-        onDelete: this.onDelete.bind(this),
-        onToggle: this.onToggle.bind(this),
-      },
     });
   }
 
@@ -103,21 +85,6 @@ export default class App {
     this.$tabs.setState({
       activeTab: this.activeTab,
     });
-  }
-
-  // Getters
-  get totalCount() {
-    return this.state.todoData.length;
-  }
-
-  get completedCount() {
-    const {todoData} = this.state;
-
-    return todoData.length ? todoData.filter(todo => todo.isCompleted).length : 0;
-  }
-
-  get activeTab() {
-    return this.state.activeTab;
   }
 
   // Api
@@ -143,37 +110,5 @@ export default class App {
     if (window.confirm('전체 삭제하시겠습니까???')) {
       alert('개발 중인 기능입니다.');
     }
-  }
-
-  onSubmit(title) {
-    this.createTodoItem(title);
-  }
-
-  async createTodoItem(title) {
-    const todoData = {
-      title,
-      isCompleted: false,
-    };
-
-    const result = await api.createTodo(todoData);
-
-    this.fetchData();
-  }
-
-  async onDelete(id) {
-    const result = await api.deleteTodo(id);
-
-    this.fetchData();
-  }
-
-  async onToggle(id) {
-    const {todoData} = this.state;
-    const todoItem = todoData.find(todo => todo.id === id);
-
-    const result = await api.updateTodo(id, {
-      isCompleted: !todoItem.isCompleted,
-    });
-
-    this.fetchData();
   }
 }

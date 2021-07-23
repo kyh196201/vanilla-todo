@@ -7,11 +7,6 @@ export default class TodoList extends Component {
     super(params);
   }
 
-  setup() {
-    this.onToggle = this.$props.onToggle;
-    this.onDelete = this.$props.onDelete;
-  }
-
   createElement() {
     const $el = document.createElement('section');
     $el.className = 'todo-list-container';
