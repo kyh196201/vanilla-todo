@@ -69,22 +69,46 @@ export default class TodoList extends Component {
       const id = parseInt($todoItem.dataset.id);
 
       if ($target.classList.contains('todo-item__toggle-btn')) {
-        this.onToggle(id);
+        this.handleToggleTodo(id);
       } else if ($target.classList.contains('todo-item__delete-btn')) {
         if (window.confirm('삭제하시겠습니까?')) {
-          // this.onDelete(id);
-          this.handleDeleteItem(id);
+          this.handleDeleteTodo(id);
         }
       }
     });
   }
 
   // Actions
-  handleDeleteItem(id) {
+  handleDeleteTodo(id) {
     try {
       this.$store.dispatch('deleteTodo', id);
     } catch (error) {
       console.error('error in handleDelteItem', error.message);
     }
+  }
+
+  handleToggleTodo(id) {
+    try {
+      const todoItem = this.findTodoItem(id);
+
+      if (!todoItem) throw new Error('no todo');
+
+      const params = {
+        id,
+        todoData: {
+          isCompleted: !todoItem.isCompleted,
+        },
+      };
+
+      this.$store.dispatch('updateTodo', params);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  findTodoItem(id) {
+    if (!id) return null;
+
+    return this.$store.state.todoData.find(todo => todo.id === id);
   }
 }

@@ -5,6 +5,7 @@ export default class Component {
     this.$target = params.$target;
     this.state = params.state || {};
     this.$props = params.$props || {};
+    this.isStable = params.isStable || false;
 
     this.render = this.render || function () {};
 
@@ -12,6 +13,9 @@ export default class Component {
       this.$store = params.store;
 
       params.store.events.subscribe('stateChange', () => {
+        // FIXME 정적 컴포넌트 정의
+        if (this.isStable) return;
+
         this.render.call(this);
       });
     }
@@ -29,7 +33,11 @@ export default class Component {
 
   render() {
     this.$el.innerHTML = this.template();
+
+    this.mounted();
   }
+
+  mounted() {}
 
   validate() {}
 

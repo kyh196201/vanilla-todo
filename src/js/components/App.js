@@ -57,6 +57,7 @@ export default class App {
     this.$todoInput = new TodoInput({
       $target: this.$el,
       store: this.$store || null,
+      isStable: true,
       state: {},
       $props: {
         onSubmit: this.onSubmit.bind(this),
@@ -66,6 +67,7 @@ export default class App {
     // TodoCount
     this.$todoCount = new TodoCount({
       $target: this.$el,
+      store: this.$store || null,
       state: {
         total: this.totalCount,
         completed: this.completedCount,

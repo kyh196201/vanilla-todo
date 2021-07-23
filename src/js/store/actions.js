@@ -21,4 +21,10 @@ export default {
 
     return await context.dispatch('fetchTodos');
   },
+
+  async updateTodo(context, {id, todoData}) {
+    const result = await api.updateTodo(id, todoData);
+
+    return await context.dispatch('fetchTodos');
+  },
 };

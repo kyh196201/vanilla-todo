@@ -63,5 +63,6 @@ export default class TodoInput extends Component {
     const $input = this.$el.querySelector('.todo-input');
 
     $input.value = '';
+    $input.focus();
   }
 }

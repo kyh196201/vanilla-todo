@@ -44,16 +44,20 @@ export const deleteTodo = async id => {
 };
 
 export const updateTodo = async (id, todoData) => {
-  const url = `${domain.todo}/${id}`;
+  try {
+    const url = `${domain.todo}/${id}`;
 
-  const response = await fetch(url, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(todoData),
-  });
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(todoData),
+    });
 
-  const result = await response.json();
-  return result;
+    return await response.json();
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
 };
