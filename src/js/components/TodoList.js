@@ -3,11 +3,8 @@ import Component from '../core/Component';
 const tag = 'todo-list';
 
 export default class TodoList extends Component {
-  setup() {
-    this.onToggle = this.$props.onToggle;
-    this.onDelete = this.$props.onDelete;
-
-    this.createElement();
+  constructor(params) {
+    super(params);
   }
 
   createElement() {
@@ -26,10 +23,10 @@ export default class TodoList extends Component {
   }
 
   template() {
-    const {data} = this.state;
+    const {todoData} = this.$store.state;
 
-    return data.length
-      ? data
+    return todoData.length
+      ? todoData
           .map(todo => {
             return this.todoTemplate(todo);
           })
@@ -58,7 +55,7 @@ export default class TodoList extends Component {
   }
 
   bindEvents() {
-    this.$target.addEventListener('click', e => {
+    this.$el.addEventListener('click', e => {
       const $target = e.target;
       const $todoItem = $target.closest('.todo-item');
 
@@ -67,12 +64,46 @@ export default class TodoList extends Component {
       const id = parseInt($todoItem.dataset.id);
 
       if ($target.classList.contains('todo-item__toggle-btn')) {
-        this.onToggle(id);
+        this.handleToggleTodo(id);
       } else if ($target.classList.contains('todo-item__delete-btn')) {
         if (window.confirm('삭제하시겠습니까?')) {
-          this.onDelete(id);
+          this.handleDeleteTodo(id);
         }
       }
     });
+  }
+
+  // Actions
+  handleDeleteTodo(id) {
+    try {
+      this.$store.dispatch('deleteTodo', id);
+    } catch (error) {
+      console.error('error in handleDelteItem', error.message);
+    }
+  }
+
+  handleToggleTodo(id) {
+    try {
+      const todoItem = this.findTodoItem(id);
+
+      if (!todoItem) throw new Error('no todo');
+
+      const params = {
+        id,
+        todoData: {
+          isCompleted: !todoItem.isCompleted,
+        },
+      };
+
+      this.$store.dispatch('updateTodo', params);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  findTodoItem(id) {
+    if (!id) return null;
+
+    return this.$store.state.todoData.find(todo => todo.id === id);
   }
 }

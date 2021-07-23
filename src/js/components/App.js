@@ -3,12 +3,18 @@ import TodoInput from './TodoInput';
 import TodoCount from './TodoCount';
 import Tabs from './Tabs';
 import * as api from '../api/index.js';
+import Store from '../store/store';
 
 const tag = 'app';
 
 export default class App {
-  constructor($target) {
-    this.$target = $target;
+  constructor(params) {
+    this.$target = params.$target;
+
+    if (params.store instanceof Store) {
+      this.$store = params.store;
+    }
+
     this.state = {
       todoData: [],
       isLoading: false,
@@ -27,53 +33,42 @@ export default class App {
     this.$target.appendChild($el);
   }
 
-  init() {
+  async init() {
     this.validate();
     this.createElement();
+    await this.fetchData();
+    this.render();
     this.bindEvents();
+  }
 
+  validate() {}
+
+  // 컴포넌트 렌더링
+  render() {
     this.$tabs = new Tabs({
       $target: this.$el,
-      state: {
-        tabs: this.state.tabs,
-        activeTab: this.activeTab,
-      },
+      store: this.$store || null,
     });
 
     // TodoInput
     this.$todoInput = new TodoInput({
       $target: this.$el,
-      state: {},
-      $props: {
-        onSubmit: this.onSubmit.bind(this),
-      },
+      store: this.$store || null,
+      isStable: true,
     });
 
     // TodoCount
     this.$todoCount = new TodoCount({
       $target: this.$el,
-      state: {
-        total: this.totalCount,
-        completed: this.completedCount,
-      },
+      store: this.$store || null,
     });
 
     // TodoList
     this.$todoList = new TodoList({
       $target: this.$el,
-      state: {
-        data: this.state.todoData,
-      },
-      $props: {
-        onDelete: this.onDelete.bind(this),
-        onToggle: this.onToggle.bind(this),
-      },
+      store: this.$store || null,
     });
-
-    this.fetchData();
   }
-
-  validate() {}
 
   setState(newState) {
     this.state = {...this.state, ...newState};
@@ -92,28 +87,9 @@ export default class App {
     });
   }
 
-  // Getters
-  get totalCount() {
-    return this.state.todoData.length;
-  }
-
-  get completedCount() {
-    const {todoData} = this.state;
-
-    return todoData.length ? todoData.filter(todo => todo.isCompleted).length : 0;
-  }
-
-  get activeTab() {
-    return this.state.activeTab;
-  }
-
   // Api
   async fetchData() {
-    const data = await api.fetchTodo();
-
-    this.setState({
-      todoData: data,
-    });
+    return await this.$store.dispatch('fetchTodos');
   }
 
   //   Events
@@ -132,42 +108,7 @@ export default class App {
 
   handleDeleteAll() {
     if (window.confirm('전체 삭제하시겠습니까???')) {
-      alert('개발 중');
-      // this.setState({
-      //   todoData: [],
-      // });
+      alert('개발 중인 기능입니다.');
     }
-  }
-
-  onSubmit(title) {
-    this.createTodoItem(title);
-  }
-
-  async createTodoItem(title) {
-    const todoData = {
-      title,
-      isCompleted: false,
-    };
-
-    const result = await api.createTodo(todoData);
-
-    this.fetchData();
-  }
-
-  async onDelete(id) {
-    const result = await api.deleteTodo(id);
-
-    this.fetchData();
-  }
-
-  async onToggle(id) {
-    const {todoData} = this.state;
-    const todoItem = todoData.find(todo => todo.id === id);
-
-    const result = await api.updateTodo(id, {
-      isCompleted: !todoItem.isCompleted,
-    });
-
-    this.fetchData();
   }
 }

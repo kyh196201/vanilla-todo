@@ -3,10 +3,8 @@ import Component from '../core/Component';
 const tag = 'todo-input';
 
 export default class TodoInput extends Component {
-  setup() {
-    this.onSubmit = this.$props.onSubmit;
-
-    this.createElement();
+  constructor(params) {
+    super(params);
   }
 
   createElement() {
@@ -28,26 +26,32 @@ export default class TodoInput extends Component {
   }
 
   bindEvents() {
-    const $form = this.$el.querySelector('form');
+    this.$el.addEventListener('submit', e => {
+      e.preventDefault();
+      const $target = e.target;
 
-    $form.addEventListener('submit', e => {
-      this.handleSubmit(e);
+      if ($target.nodeName === 'FORM') {
+        this.handleSubmit();
+      }
     });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-
+  async handleSubmit() {
     const $input = this.$el.querySelector('.todo-input');
     const title = $input.value.trim();
 
     if (!title) {
       alert('할 일을 입력해주세요!');
+      $input.focus();
       return false;
     }
 
-    this.onSubmit(title);
+    const todoData = {
+      title,
+      isCompleted: false,
+    };
 
+    await this.$store.dispatch('createTodo', todoData);
     this.clearInput();
   }
 
@@ -55,5 +59,6 @@ export default class TodoInput extends Component {
     const $input = this.$el.querySelector('.todo-input');
 
     $input.value = '';
+    $input.focus();
   }
 }

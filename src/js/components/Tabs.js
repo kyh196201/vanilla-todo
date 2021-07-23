@@ -10,13 +10,13 @@ export default class Tabs extends Component {
   }
 
   template() {
-    const {tabs} = this.state;
+    const {tabs} = this.$store.state;
 
     return tabs.map(tab => this.createTabItem(tab)).join('');
   }
 
   createTabItem(tab) {
-    const isActive = tab === this.state.activeTab;
+    const isActive = tab === this.$store.state.activeTab;
 
     const $radio = isActive
       ? `<input type="radio" name="tab" value="${tab}" checked>`
