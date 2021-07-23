@@ -1,6 +1,7 @@
-@import "./variables";
+// @import "./_variables.scss";
 @import "./reset.scss";
 @import "~pretty-checkbox/src/pretty-checkbox.scss";
+@import "./common.scss";
 @import "./layout.scss";
 @import "./app.scss";
 @import "./tabs.scss";

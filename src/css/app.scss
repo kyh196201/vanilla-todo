@@ -9,6 +9,7 @@
 	overflow: hidden;
 	border-radius: 1.2rem;
 	background-color: $app-color;
+	font-family: $poppins;
 }
 
 .todo {
@@ -25,8 +26,14 @@
 	&-body {
 		display: flex;
 		overflow: hidden;
-		flex-direction: column;
 		flex: 1;
 		padding: 3rem 2rem;
+	}
+
+	&-content {
+		display: flex;
+		overflow: hidden;
+		flex-direction: column;
+		flex: 1;
 	}
 }

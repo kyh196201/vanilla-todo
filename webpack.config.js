@@ -25,7 +25,18 @@ module.exports = {
     rules: [
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: `
+              @import './_variables.scss';
+            `,
+            },
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

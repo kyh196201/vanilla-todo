@@ -1,5 +1,8 @@
 import Component from '../core/Component';
 
+// icons
+import {tabIcons} from '../utils/constant';
+
 export default class Tabs extends Component {
   createElement() {
     const $el = document.createElement('ul');
@@ -26,9 +29,16 @@ export default class Tabs extends Component {
 		<li class="tab-item ${isActive ? 'active' : ''}">
 			<label>
 				${$radio}
-				<span class="tab-title">${tab}</span>
+				<span class="tab-title">
+          <span class="visually-hidden">${tab}</span>
+          ${this.getTabIcon(tab)}
+        </span>
 			</label>
 		</li>
 	`;
+  }
+
+  getTabIcon(tab) {
+    return tabIcons[tab];
   }
 }

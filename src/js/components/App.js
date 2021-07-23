@@ -32,11 +32,17 @@ export default class App {
     const $body = document.createElement('section');
     $body.className = 'todo-body';
 
+    const $todoContent = document.createElement('section');
+    $todoContent.className = 'todo-content';
+
+    $body.appendChild($todoContent);
+
     $el.appendChild($header);
     $el.appendChild($body);
 
     this.$header = $header;
     this.$body = $body;
+    this.$todoContent = $todoContent;
     this.$el = $el;
     this.$target.appendChild($el);
   }
@@ -60,20 +66,20 @@ export default class App {
 
     // TodoInput
     this.$todoInput = new TodoInput({
-      $target: this.$body,
+      $target: this.$todoContent,
       store: this.$store || null,
       isStable: true,
     });
 
     // TodoCount
     this.$todoCount = new TodoCount({
-      $target: this.$body,
+      $target: this.$todoContent,
       store: this.$store || null,
     });
 
     // TodoList
     this.$todoList = new TodoList({
-      $target: this.$body,
+      $target: this.$todoContent,
       store: this.$store || null,
     });
   }
