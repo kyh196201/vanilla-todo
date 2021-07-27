@@ -5,7 +5,7 @@ export default class Pubsub {
 
   //   이벤트 등록
   subscribe(event, callback) {
-    let self = this;
+    const self = this;
 
     if (!self.events.hasOwnProperty(event)) {
       self.events[event] = [];
@@ -16,7 +16,7 @@ export default class Pubsub {
 
   //   이벤트 실행
   publish(event, data = {}) {
-    let self = this;
+    const self = this;
 
     if (!self.events.hasOwnProperty(event)) {
       return [];

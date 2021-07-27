@@ -129,9 +129,11 @@ export default class App {
     });
   }
 
-  // handleDeleteAll() {
-  //   if (window.confirm('전체 삭제하시겠습니까???')) {
-  //     alert('개발 중인 기능입니다.');
-  //   }
-  // }
+  handleDeleteAll() {
+    if (window.confirm('전체 삭제하시겠습니까???')) {
+      alert('개발 중인 기능입니다.');
+    }
+
+    return true;
+  }
 }

@@ -1,12 +1,6 @@
 import Component from '../core/Component';
 
-const tag = 'todo-list';
-
 export default class TodoList extends Component {
-  constructor(params) {
-    super(params);
-  }
-
   createElement() {
     const $el = document.createElement('section');
     $el.className = 'todo-list-container';
@@ -26,11 +20,7 @@ export default class TodoList extends Component {
     const {todoData} = this.$store.state;
 
     return todoData.length
-      ? todoData
-          .map(todo => {
-            return this.todoTemplate(todo);
-          })
-          .join('')
+      ? todoData.map(todo => this.todoTemplate(todo)).join('')
       : '<li class="todo-item todo-item--empty">할 일을 입력해주세요 😉</li>';
   }
 

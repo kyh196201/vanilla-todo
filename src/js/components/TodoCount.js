@@ -1,10 +1,6 @@
 import Component from '../core/Component';
 
 export default class TodoCount extends Component {
-  constructor(params) {
-    super(params);
-  }
-
   createElement() {
     const $el = document.createElement('section');
     $el.className = 'todo-count';
@@ -35,6 +31,8 @@ export default class TodoCount extends Component {
   }
 
   get completed() {
-    return this.total > 0 ? this.todoData.filter(todo => todo.isCompleted).length : 0;
+    return this.total > 0
+      ? this.todoData.filter(todo => todo.isCompleted).length
+      : 0;
   }
 }
