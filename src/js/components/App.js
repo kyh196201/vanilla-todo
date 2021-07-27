@@ -60,7 +60,9 @@ export default class App {
     this.bindEvents();
   }
 
-  validate() {}
+  validate() {
+    return this;
+  }
 
   // 컴포넌트 생성
   initChildComponents() {
@@ -91,7 +93,9 @@ export default class App {
 
   // Api
   async fetchData() {
-    return await this.$store.dispatch('fetchTodos');
+    await this.$store.dispatch('fetchTodos');
+
+    return true;
   }
 
   render() {
@@ -109,7 +113,11 @@ export default class App {
 
   // Events
   bindEvents() {
-    this.$el.addEventListener('@delete-all', this.handleDeleteAll.bind(this), false);
+    this.$el.addEventListener(
+      '@delete-all',
+      this.handleDeleteAll.bind(this),
+      false,
+    );
 
     this.$el.addEventListener('click', e => {
       const $eventTarget = e.target;
@@ -121,9 +129,9 @@ export default class App {
     });
   }
 
-  handleDeleteAll() {
-    if (window.confirm('전체 삭제하시겠습니까???')) {
-      alert('개발 중인 기능입니다.');
-    }
-  }
+  // handleDeleteAll() {
+  //   if (window.confirm('전체 삭제하시겠습니까???')) {
+  //     alert('개발 중인 기능입니다.');
+  //   }
+  // }
 }

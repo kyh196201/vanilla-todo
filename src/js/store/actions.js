@@ -1,11 +1,12 @@
-import * as api from '../api/';
+import * as api from '../api';
 
 export default {
   // delete todo item
   async deleteTodo(context, id) {
     await api.deleteTodo(id);
+    await context.dispatch('fetchTodos');
 
-    return await context.dispatch('fetchTodos');
+    return true;
   },
 
   // fetch todo itmes
@@ -17,15 +18,17 @@ export default {
 
   // add todo item
   async createTodo(context, todoData) {
-    const result = await api.createTodo(todoData);
+    await api.createTodo(todoData);
+    await context.dispatch('fetchTodos');
 
-    return await context.dispatch('fetchTodos');
+    return true;
   },
 
   async updateTodo(context, {id, todoData}) {
-    const result = await api.updateTodo(id, todoData);
+    await api.updateTodo(id, todoData);
+    await context.dispatch('fetchTodos');
 
-    return await context.dispatch('fetchTodos');
+    return true;
   },
 
   //

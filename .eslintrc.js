@@ -9,7 +9,7 @@ module.exports = {
     node: true,
     es6: true,
   },
-  plugins: ['html', 'import', 'eslint-plugin-prettier'],
+  plugins: ['html', 'import', 'prettier'],
   extends: ['eslint:recommended', 'airbnb-base', 'prettier'],
   rules: {
     'prettier/prettier': [
