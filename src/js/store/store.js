@@ -2,7 +2,7 @@ import Pubsub from '../lib/pubsub';
 
 export default class Store {
   constructor(params = {}) {
-    let self = this;
+    const self = this;
 
     self.actions = {};
     self.mutations = {};
@@ -19,7 +19,7 @@ export default class Store {
     }
 
     self.state = new Proxy(params.state || {}, {
-      set: function (state, key, value) {
+      set(state, key, value) {
         state[key] = value;
 
         console.log(`stateChange: ${key}: ${value}`);
@@ -39,7 +39,7 @@ export default class Store {
 
   //   dispatch
   dispatch(actionKey, payload) {
-    let self = this;
+    const self = this;
 
     if (typeof self.actions[actionKey] !== 'function') {
       console.error(`Action ${actionKey} does not exist.`);
@@ -58,7 +58,7 @@ export default class Store {
   }
 
   commit(mutationKey, payload) {
-    let self = this;
+    const self = this;
 
     if (typeof self.mutations[mutationKey] !== 'function') {
       console.error(`Mutation ${mutationKey} does not exist.`);

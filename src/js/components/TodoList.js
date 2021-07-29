@@ -1,4 +1,8 @@
+// Components
 import Component from '../core/Component';
+
+// Utils
+import todoTemplate from '../utils/template/todoTemplate';
 
 export default class TodoList extends Component {
   createElement() {
@@ -20,45 +24,12 @@ export default class TodoList extends Component {
     const {todoData} = this.$store.state;
 
     return todoData.length
-      ? todoData.map(todo => this.todoTemplate(todo)).join('')
+      ? todoData.map(todo => todoTemplate(todo)).join('')
       : '<li class="todo-item todo-item--empty">할 일을 입력해주세요 😉</li>';
   }
 
   render() {
     this.$list.innerHTML = this.template();
-  }
-
-  todoTemplate(todo) {
-    const {id} = todo;
-
-    const $checkbox = this.checkboxTemplate(todo);
-
-    return `
-      <li class="todo-item" data-id="${id}">
-        ${$checkbox}
-        <button type="button" class="todo-item__delete-btn">&times;</button>
-      </li>`;
-  }
-
-  checkboxTemplate({title, isCompleted}) {
-    const $checkbox = isCompleted
-      ? `<input type="checkbox" class="todo-item__checkbox" checked>`
-      : `<input type="checkbox" class="todo-item__checkbox" />`;
-
-    const $title = isCompleted ? `<strike>${title}</strike>` : title;
-
-    return `
-      <div class="todo-item__checkbox-wrapper pretty p-default">
-        ${$checkbox}
-        <div class="state p-danger">
-            <label>
-              <span class="todo-item__title">
-                ${$title}
-              </span>
-            </label>
-        </div>
-      </div>
-    `;
   }
 
   bindEvents() {

@@ -25,7 +25,7 @@
 		&:hover,
 		&:active {
 			.todo-item {
-				&__delete-btn {
+				&__btn {
 					opacity: 1;
 				}
 			}
@@ -50,7 +50,7 @@
 			}
 		}
 
-		&__delete-btn {
+		&__btn {
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -58,9 +58,17 @@
 			height: $todo-button-width;
 			font-size: 1.25em;
 			font-weight: bold;
-			color: $delete-button-color;
 			opacity: 0.75;
 			transition: opacity 0.3s;
+
+			&.todo-item__btn--delete {
+				margin-left: 0.5em;
+				color: $delete-button-color;
+			}
+
+			&.todo-item__btn--edit {
+				font-size: 1em;
+			}
 		}
 
 		label {

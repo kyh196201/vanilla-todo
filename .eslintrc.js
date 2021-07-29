@@ -29,5 +29,7 @@ module.exports = {
       },
     ],
     'no-unused-vars': 'error',
+    'no-console': 'off',
+    radix: 'off',
   },
 };
