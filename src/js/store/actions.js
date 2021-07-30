@@ -28,7 +28,24 @@ export default {
     await api.updateTodo(id, todoData);
     await context.dispatch('fetchTodos');
 
+    if (context.state.editingId) {
+      context.dispatch('stopEdit');
+    }
+
     return true;
+  },
+
+  startEdit(context, id) {
+    const todoItem = context.state.todoData.find(todo => todo.id === id);
+    if (todoItem) {
+      context.commit('setEditId', id);
+      context.commit('setBeforeEditValue', todoItem.title);
+    }
+  },
+
+  stopEdit(context) {
+    context.commit('setEditId', null);
+    context.commit('setBeforeEditValue', '');
   },
 
   //

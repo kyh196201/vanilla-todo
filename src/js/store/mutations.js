@@ -10,4 +10,16 @@ export default {
 
     return state;
   },
+
+  setEditId(state, id) {
+    state.editingId = id;
+
+    return state;
+  },
+
+  setBeforeEditValue(state, value) {
+    state.valueBeforeEdit = value;
+
+    return state;
+  },
 };
