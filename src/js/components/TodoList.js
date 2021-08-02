@@ -96,7 +96,7 @@ export default class TodoList extends Component {
       const $target = e.target;
 
       if ($target.classList.contains('todo-item__edit')) {
-        this.handleCancelEdit();
+        // this.handleCancelEdit();
       }
     });
   }

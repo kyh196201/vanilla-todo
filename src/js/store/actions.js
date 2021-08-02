@@ -11,26 +11,34 @@ export default {
 
   // fetch todo itmes
   async fetchTodos(context) {
+    context.dispatch('startLoading');
     const result = await api.fetchTodos();
+    context.commit('setTodos', result);
+    context.dispatch('stopLoading');
 
-    return context.commit('setTodos', result);
+    return true;
   },
 
   // add todo item
   async createTodo(context, todoData) {
+    context.dispatch('startLoading');
     await api.createTodo(todoData);
     await context.dispatch('fetchTodos');
+    context.dispatch('stopLoading');
 
     return true;
   },
 
   async updateTodo(context, {id, todoData}) {
+    context.dispatch('startLoading');
     await api.updateTodo(id, todoData);
     await context.dispatch('fetchTodos');
 
     if (context.state.editingId) {
       context.dispatch('stopEdit');
     }
+
+    context.dispatch('stopLoading');
 
     return true;
   },
@@ -51,5 +59,13 @@ export default {
   //
   changeTab(context, tab) {
     context.commit('changeTab', tab);
+  },
+
+  startLoading(context) {
+    context.commit('setLoading', true);
+  },
+
+  stopLoading(context) {
+    context.commit('setLoading', false);
   },
 };

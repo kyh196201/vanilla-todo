@@ -22,4 +22,10 @@ export default {
 
     return state;
   },
+
+  setLoading(state, loading) {
+    state.loading = loading;
+
+    return state;
+  },
 };
