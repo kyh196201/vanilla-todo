@@ -1,0 +1,30 @@
+.loading-view {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: $loading-view-background-color;
+	z-index: 9999;
+
+	&.show {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.spinner {
+		transform: translateZ(1px);
+
+		& > div {
+			display: inline-block;
+			width: 64px;
+			height: 64px;
+			margin: 8px;
+			border-radius: 50%;
+			background: $main-color-dark;
+			animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+		}
+	}
+}

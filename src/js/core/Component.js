@@ -13,7 +13,7 @@ export default class Component {
       this.$store = params.store;
 
       params.store.events.subscribe('stateChange', () => {
-        // FIXME 정적 컴포넌트 정의
+        // NOTE 정적 컴포넌트 정의
         if (this.isStable) return;
 
         this.render.call(this);

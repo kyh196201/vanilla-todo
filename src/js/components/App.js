@@ -1,7 +1,11 @@
+// 컴포넌트
 import TodoList from './TodoList';
 import TodoInput from './TodoInput';
 import TodoCount from './TodoCount';
 import Tabs from './Tabs';
+import LoadingView from './LoadingView';
+
+// 스토어
 import Store from '../store/store';
 
 export default class App {
@@ -87,6 +91,12 @@ export default class App {
     // TodoList
     this.$todoList = new TodoList({
       $target: this.$todoContent,
+      store: this.$store || null,
+    });
+
+    // LoadingView
+    this.$loadingView = new LoadingView({
+      $target: this.$el,
       store: this.$store || null,
     });
   }
