@@ -32,4 +32,16 @@ module.exports = {
     'no-console': 'off',
     radix: 'off',
   },
+  settings: {
+    'import/resolver': {
+      'babel-module': {
+        // alias
+        root: ['.'],
+        alias: {
+          '@': './src',
+          Components: './src/js/components',
+        },
+      },
+    },
+  },
 };

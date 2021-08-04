@@ -1,5 +1,5 @@
 // 컴포넌트
-import TodoList from 'Components/TodoList.js';
+import TodoList from 'Components/TodoList';
 import TodoInput from './TodoInput';
 import TodoCount from './TodoCount';
 import Tabs from './Tabs';
