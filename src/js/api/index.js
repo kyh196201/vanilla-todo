@@ -1,5 +1,5 @@
 // api
-import {domain} from '../config/index.js';
+import {domain} from 'Config/';
 
 export const fetchTodos = async () => {
   const response = await fetch(domain.todo, {

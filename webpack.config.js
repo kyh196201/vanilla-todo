@@ -17,6 +17,12 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src/'),
       Components: path.resolve(__dirname, 'src/js/components/'),
+      Store: path.resolve(__dirname, 'src/js/store/'),
+      Api: path.resolve(__dirname, 'src/js/api/'),
+      Utils: path.resolve(__dirname, 'src/js/utils/'),
+      Core: path.resolve(__dirname, 'src/js/core/'),
+      Config: path.resolve(__dirname, 'src/js/config/'),
+      Lib: path.resolve(__dirname, 'src/js/lib/'),
     },
   },
   devtool: 'inline-source-map',

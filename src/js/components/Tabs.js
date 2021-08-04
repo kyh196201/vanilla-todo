@@ -1,7 +1,6 @@
-import Component from '../core/Component';
-
 // icons
-import {tabIcons} from '../utils/constant';
+import {tabIcons} from 'Utils/constant';
+import Component from 'Core/Component';
 
 export default class Tabs extends Component {
   createElement() {

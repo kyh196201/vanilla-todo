@@ -1,7 +1,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import App from './components/App.js';
-import store from './store/index.js';
+import store from 'Store/';
+import App from 'Components/App';
 
 import '../css/_index.scss';
 

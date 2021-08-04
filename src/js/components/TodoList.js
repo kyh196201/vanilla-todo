@@ -1,11 +1,9 @@
 // Components
-import Component from '../core/Component';
-
-// Utils
-import {todoTemplate, editTemplate} from '../utils/template/todoTemplate';
-
+// Templates
+import {todoTemplate, editTemplate} from 'Utils/template/todoTemplate';
 // Constants
-import {KEY_CODES} from '../utils/constant';
+import {KEY_CODES} from 'Utils/constant';
+import Component from 'Core/Component';
 
 export default class TodoList extends Component {
   createElement() {

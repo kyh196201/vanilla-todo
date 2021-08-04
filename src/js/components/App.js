@@ -1,12 +1,12 @@
 // 컴포넌트
 import TodoList from 'Components/TodoList';
-import TodoInput from './TodoInput';
-import TodoCount from './TodoCount';
-import Tabs from './Tabs';
-import LoadingView from './LoadingView';
+import TodoInput from 'Components/TodoInput';
+import TodoCount from 'Components/TodoCount';
+import Tabs from 'Components/Tabs';
+import LoadingView from 'Components/LoadingView';
 
 // 스토어
-import Store from '../store/store';
+import Store from 'Store/store';
 
 export default class App {
   constructor(params) {

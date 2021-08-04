@@ -1,3 +1,3 @@
 export const domain = {
-  todo: API_URL + 'todo',
+  todo: `${API_URL}todo`,
 };

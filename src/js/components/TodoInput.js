@@ -1,4 +1,4 @@
-import Component from '../core/Component';
+import Component from 'Core/Component';
 
 export default class TodoInput extends Component {
   createElement() {

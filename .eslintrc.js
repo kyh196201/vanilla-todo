@@ -40,6 +40,12 @@ module.exports = {
         alias: {
           '@': './src',
           Components: './src/js/components',
+          Store: './src/js/store',
+          Api: './src/js/api',
+          Utils: './src/js/utils',
+          Core: './src/js/core',
+          Config: './src/js/config',
+          Lib: './src/js/lib',
         },
       },
     },
