@@ -12,6 +12,13 @@ module.exports = {
     filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
   },
+  resolve: {
+    // https://code.visualstudio.com/docs/languages/jsconfig#_using-webpack-aliases
+    alias: {
+      '@': path.resolve(__dirname, 'src/'),
+      Components: path.resolve(__dirname, 'src/js/components/'),
+    },
+  },
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -59,7 +66,10 @@ module.exports = {
                 },
               ],
             ],
-            plugins: [['@babel/plugin-proposal-class-properties'], ['@babel/plugin-transform-runtime', {corejs: 3}]],
+            plugins: [
+              ['@babel/plugin-proposal-class-properties'],
+              ['@babel/plugin-transform-runtime', {corejs: 3}],
+            ],
           },
         },
       },
