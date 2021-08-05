@@ -1,11 +1,16 @@
 html {
 	font-size: 62.5%;
+
+	@include tablet {
+		font-size: 73%;
+	}
 }
 
 body {
 	position: relative;
 	width: 100vw;
 	height: 100vh;
+	min-width: 200px;
 	background-color: $body-color;
 }
 
