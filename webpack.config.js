@@ -10,7 +10,7 @@ module.exports = {
   },
   output: {
     filename: '[name].[hash].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
   },
   resolve: {
     // https://code.visualstudio.com/docs/languages/jsconfig#_using-webpack-aliases
@@ -83,7 +83,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Development',
+      title: 'vanilla-todo-app',
       template: './index.html',
       filename: 'index.html',
     }),
