@@ -13,6 +13,10 @@
 1_basic
 
 2_store: 바닐라 스크립트로 작성한 Store 연동
+
+3_json-server: json-server API를 사용한 로컬 REST API 테스트
+
+4_local-storage: 로컬 스토리지를 사용하는 브랜치
 ```
 
 ## 참고
