@@ -44,12 +44,7 @@ export default class TodoInput extends Component {
       return false;
     }
 
-    const todoData = {
-      title,
-      isCompleted: false,
-    };
-
-    await this.$store.dispatch('createTodo', todoData);
+    await this.$store.dispatch('createTodo', title);
     this.clearInput();
   }
 

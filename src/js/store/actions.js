@@ -1,9 +1,9 @@
-import * as api from '../api';
+import todoModel from '@/js/model';
 
 export default {
   // delete todo item
   async deleteTodo(context, id) {
-    await api.deleteTodo(id);
+    await todoModel.delete(id);
     await context.dispatch('fetchTodos');
 
     return true;
@@ -12,8 +12,8 @@ export default {
   // fetch todo itmes
   async fetchTodos(context) {
     context.dispatch('startLoading');
-    const result = await api.fetchTodos();
-    context.commit('setTodos', result);
+    const result = await todoModel.read();
+    context.commit('setTodos', result.data.todoList);
     context.dispatch('stopLoading');
 
     return true;
@@ -22,7 +22,7 @@ export default {
   // add todo item
   async createTodo(context, todoData) {
     context.dispatch('startLoading');
-    await api.createTodo(todoData);
+    await todoModel.add(todoData);
     await context.dispatch('fetchTodos');
     context.dispatch('stopLoading');
 
@@ -31,7 +31,7 @@ export default {
 
   async updateTodo(context, {id, todoData}) {
     context.dispatch('startLoading');
-    await api.updateTodo(id, todoData);
+    await todoModel.update(id, todoData);
     await context.dispatch('fetchTodos');
 
     if (context.state.editingId) {
