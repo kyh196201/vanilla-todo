@@ -10,7 +10,7 @@ module.exports = {
   },
   output: {
     filename: '[name].[hash].js',
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
     // https://code.visualstudio.com/docs/languages/jsconfig#_using-webpack-aliases
