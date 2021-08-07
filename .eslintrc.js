@@ -30,6 +30,7 @@ module.exports = {
     ],
     'no-unused-vars': 'error',
     'no-console': 'off',
+    'class-methods-use-this': 'off',
     radix: 'off',
   },
   settings: {
