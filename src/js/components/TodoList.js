@@ -33,7 +33,7 @@ export default class TodoList extends Component {
             return todoTemplate(todo);
           })
           .join('')
-      : '<li class="todo-item todo-item--empty">할 일을 입력해주세요 😉</li>';
+      : '<li class="todo-item todo-item--empty">할 일을 추가해주세요 😉</li>';
   }
 
   render() {
