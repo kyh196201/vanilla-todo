@@ -3,6 +3,7 @@ import {getItem, setItem} from 'Utils/storage/';
 const todoModel = {
   data: getItem(),
 
+  // update todo
   update(id, todoData) {
     const self = this;
     const {data} = self;
@@ -17,6 +18,7 @@ const todoModel = {
           id,
           title: title ?? target.title,
           isCompleted: isCompleted ?? target.isCompleted,
+          timestamp: target.timestamp,
         };
 
         const newData = [
@@ -40,7 +42,8 @@ const todoModel = {
     });
   },
 
-  add(title) {
+  // add todo
+  add(title, timestamp = Date.now()) {
     const self = this;
     const {data} = self;
     const id = Math.max(0, ...data.map(d => d.id)) + 1;
@@ -48,6 +51,7 @@ const todoModel = {
       id,
       title,
       isCompleted: false,
+      timestamp,
     };
 
     const newData = [...data, newItem];
@@ -62,6 +66,7 @@ const todoModel = {
     });
   },
 
+  // delete todo
   delete(id) {
     const self = this;
     const {data} = self;
@@ -86,6 +91,7 @@ const todoModel = {
     });
   },
 
+  // read todo
   read() {
     const self = this;
 
@@ -97,10 +103,12 @@ const todoModel = {
     });
   },
 
+  // find todo item
   find(id) {
     return this.data.find(item => item.id === id);
   },
 
+  // find index of todo item
   findIndex(id) {
     return this.data.findIndex(item => item.id === id);
   },

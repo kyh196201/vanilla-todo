@@ -1,3 +1,6 @@
+// Utils
+import {formatTime} from 'Utils/date';
+
 const checkboxTemplate = ({id, title, isCompleted}) => {
   const $checkbox = isCompleted
     ? `<input type="checkbox" id="${id}" class="todo-item__checkbox" checked>`
@@ -12,7 +15,7 @@ const checkboxTemplate = ({id, title, isCompleted}) => {
 };
 
 const editTemplate = todo => {
-  const {id, title} = todo;
+  const {id, title, timestamp} = todo;
 
   return `
       <li class="todo-item" data-id="${id}">
@@ -27,11 +30,14 @@ const editTemplate = todo => {
 				</button>
 			</div>
 		</div>
+		<div class="todo-item__date">
+			<span>${formatTime(timestamp)}</span>
+		</div>
       </li>`;
 };
 
 const todoTemplate = todo => {
-  const {id} = todo;
+  const {id, timestamp} = todo;
 
   const $checkbox = checkboxTemplate(todo);
 
@@ -47,6 +53,9 @@ const todoTemplate = todo => {
 					<i class="fas fa-times"></i>
 				</button>
 			</div>
+		</div>
+		<div class="todo-item__date">
+			<span>${formatTime(timestamp)}</span>
 		</div>
       </li>`;
 };

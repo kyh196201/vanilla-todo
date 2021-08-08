@@ -20,9 +20,9 @@ export default {
   },
 
   // add todo item
-  async createTodo(context, todoData) {
+  async createTodo(context, title) {
     context.dispatch('startLoading');
-    await todoModel.add(todoData);
+    await todoModel.add(title);
     await context.dispatch('fetchTodos');
     context.dispatch('stopLoading');
 

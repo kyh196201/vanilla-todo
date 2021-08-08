@@ -3,6 +3,7 @@ import TodoList from 'Components/TodoList';
 import TodoInput from 'Components/TodoInput';
 import TodoCount from 'Components/TodoCount';
 import Tabs from 'Components/Tabs';
+import TodoDate from 'Components/TodoDate';
 import LoadingView from 'Components/LoadingView';
 
 // 스토어
@@ -27,11 +28,16 @@ export default class App {
     const $el = document.createElement('div');
     $el.className = 'todo-app';
 
+    // todo-header
     const $header = document.createElement('header');
     $header.className = 'todo-header';
 
+    // todo-body
     const $body = document.createElement('section');
     $body.className = 'todo-body';
+
+    const $bodyHeader = document.createElement('section');
+    $bodyHeader.className = 'todo-body__header';
 
     // todo-content
     const $todoContent = document.createElement('section');
@@ -41,6 +47,8 @@ export default class App {
     const $calendarContainer = document.createElement('section');
     $calendarContainer.className = 'calendar-container';
 
+    // body elements
+    $body.appendChild($bodyHeader);
     $body.appendChild($todoContent);
     $body.appendChild($calendarContainer);
 
@@ -49,6 +57,7 @@ export default class App {
 
     this.$header = $header;
     this.$body = $body;
+    this.$bodyHeader = $bodyHeader;
     this.$todoContent = $todoContent;
     this.$calendarContainer = $calendarContainer;
     this.$el = $el;
@@ -97,6 +106,11 @@ export default class App {
     // LoadingView
     this.$loadingView = new LoadingView({
       $target: this.$el,
+      store: this.$store || null,
+    });
+
+    this.$todoDate = new TodoDate({
+      $target: this.$bodyHeader,
       store: this.$store || null,
     });
   }

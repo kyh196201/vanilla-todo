@@ -31,6 +31,10 @@ export default class Component {
 
   createElement() {}
 
+  template() {
+    return '';
+  }
+
   render() {
     this.$el.innerHTML = this.template();
 

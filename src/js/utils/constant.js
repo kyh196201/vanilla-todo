@@ -7,3 +7,5 @@ export const KEY_CODES = {
   ENTER: 'Enter',
   ESC: 'Escape',
 };
+
+export const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

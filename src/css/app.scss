@@ -25,9 +25,14 @@
 
 	&-body {
 		display: flex;
+		flex-direction: column;
 		overflow: hidden;
 		flex: 1;
 		padding: 3rem 2rem;
+
+		&__header {
+			margin-bottom: 0.5rem;
+		}
 	}
 
 	&-content {
