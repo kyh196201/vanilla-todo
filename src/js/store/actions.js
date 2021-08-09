@@ -1,5 +1,10 @@
 import todoModel from '@/js/model';
 
+// Api
+import * as api from '@/js/firebase/database';
+
+window.api = api;
+
 export default {
   // delete todo item
   async deleteTodo(context, id) {
