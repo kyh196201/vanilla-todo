@@ -32,6 +32,7 @@ module.exports = {
     'no-console': 'off',
     'class-methods-use-this': 'off',
     'no-bitwise': 'off',
+    'no-param-reassign': 'off',
     radix: 'off',
   },
   settings: {
