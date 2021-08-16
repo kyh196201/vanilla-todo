@@ -1,5 +1,5 @@
 export const domain = {
-  todo: `${API_URL}todo`,
+  todo: `https://localhost:3000/todo`,
 };
 
 export const LS_KEY = 'todoList';

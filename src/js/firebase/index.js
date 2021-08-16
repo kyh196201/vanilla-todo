@@ -7,6 +7,7 @@ import firebaseConfig from './config';
 
 const initFirebase = () => {
   console.log('firebase initialized!!');
+  console.log(firebaseConfig);
 
   firebase.initializeApp(firebaseConfig);
 

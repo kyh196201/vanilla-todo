@@ -1,7 +1,10 @@
+const dotenv = require('dotenv');
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+
+dotenv.config();
 
 module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
@@ -100,7 +103,19 @@ module.exports = (env, argv) => {
       }),
       new CleanWebpackPlugin(),
       new webpack.DefinePlugin({
-        API_URL: JSON.stringify('http://localhost:3000/'),
+        FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
+        FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
+        FIREBASE_PROJECT_ID: JSON.stringify(process.env.FIREBASE_PROJECT_ID),
+        FIREBASE_STORAGE_BUCKET: JSON.stringify(
+          process.env.FIREBASE_STORAGE_BUCKET,
+        ),
+        FIREBASE_MESSAGING_SENDER_ID: JSON.stringify(
+          process.env.FIREBASE_MESSAGING_SENDER_ID,
+        ),
+        FIREBASE_APP_ID: JSON.stringify(process.env.FIREBASE_APP_ID),
+        FIREBASE_MEASUREMENT_ID: JSON.stringify(
+          process.env.FIREBASE_MEASUREMENT_ID,
+        ),
       }),
     ],
   };

@@ -52,4 +52,15 @@ module.exports = {
       },
     },
   },
+
+  // webpack define plugin -> eslint no undef error
+  globals: {
+    FIREBASE_API_KEY: true,
+    FIREBASE_AUTH_DOMAIN: true,
+    FIREBASE_PROJECT_ID: true,
+    FIREBASE_STORAGE_BUCKET: true,
+    FIREBASE_MESSAGING_SENDER_ID: true,
+    FIREBASE_APP_ID: true,
+    FIREBASE_MEASUREMENT_ID: true,
+  },
 };
