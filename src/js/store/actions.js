@@ -1,24 +1,22 @@
-import todoModel from '@/js/model';
-
-// Api
+// firestore
 import * as api from '@/js/firebase/database';
-
-window.api = api;
 
 export default {
   // delete todo item
   async deleteTodo(context, id) {
-    await todoModel.delete(id);
+    const result = await api.deleteTodo(id);
     await context.dispatch('fetchTodos');
 
-    return true;
+    return result;
   },
 
   // fetch todo itmes
   async fetchTodos(context) {
     context.dispatch('startLoading');
-    const result = await todoModel.read();
-    context.commit('setTodos', result.data.todoList);
+
+    const result = await api.fetchTodo();
+
+    context.commit('setTodos', result);
     context.dispatch('stopLoading');
 
     return true;
@@ -27,8 +25,10 @@ export default {
   // add todo item
   async createTodo(context, title) {
     context.dispatch('startLoading');
-    await todoModel.add(title);
+
+    await api.createTodo(title);
     await context.dispatch('fetchTodos');
+
     context.dispatch('stopLoading');
 
     return true;
@@ -36,7 +36,7 @@ export default {
 
   async updateTodo(context, {id, todoData}) {
     context.dispatch('startLoading');
-    await todoModel.update(id, todoData);
+    await api.updateTodo(id, todoData);
     await context.dispatch('fetchTodos');
 
     if (context.state.editingId) {

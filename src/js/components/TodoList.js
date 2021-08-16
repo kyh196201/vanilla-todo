@@ -54,10 +54,10 @@ export default class TodoList extends Component {
 
       if (!$todoItem) return false;
 
-      const id = parseInt($todoItem.dataset.id);
+      const {id} = $todoItem.dataset;
 
       if ($target.classList.contains('todo-item__checkbox')) {
-        this.handleToggleTodo(id);
+        this.handleToggleTodo($todoItem, id);
       } else if ($target.classList.contains('todo-item__btn--delete')) {
         if (window.confirm('삭제하시겠습니까?')) {
           this.handleDeleteTodo(id);
@@ -69,6 +69,8 @@ export default class TodoList extends Component {
       } else if ($target.classList.contains('todo-item__btn--done')) {
         this.handleUpdateTodo(id);
       }
+
+      return true;
     });
 
     // 입력 이벤트
@@ -78,7 +80,7 @@ export default class TodoList extends Component {
 
       if (!$todoItem) return false;
 
-      const id = parseInt($todoItem.dataset.id);
+      const {id} = $todoItem.dataset;
 
       if ($target.classList.contains('todo-item__edit')) {
         if (e.key === KEY_CODES.ENTER) {
@@ -87,6 +89,8 @@ export default class TodoList extends Component {
           this.handleCancelEdit();
         }
       }
+
+      return true;
     });
 
     // Blur 이벤트
@@ -108,16 +112,20 @@ export default class TodoList extends Component {
     }
   }
 
-  handleToggleTodo(id) {
+  handleToggleTodo($item, id) {
     try {
-      const todoItem = this.findTodoItem(id);
+      const $checkbox = $item?.querySelector('input');
 
-      if (!todoItem) throw new Error('no todo');
+      if (!$checkbox) {
+        throw new Error(`no todo ${id}`);
+      }
+
+      const isCompleted = $checkbox.checked;
 
       const params = {
         id,
         todoData: {
-          isCompleted: !todoItem.isCompleted,
+          isCompleted,
         },
       };
 
@@ -171,12 +179,6 @@ export default class TodoList extends Component {
 
     $input.value = this.$store.state.valueBeforeEdit;
     $input.focus();
-  }
-
-  findTodoItem(id) {
-    if (!id) return null;
-
-    return this.$store.state.todoData.find(todo => todo.id === id);
   }
 
   // edit input에 포커스

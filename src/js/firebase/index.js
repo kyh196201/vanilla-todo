@@ -1,22 +1,12 @@
 import firebase from 'firebase/app';
 import 'firebase/analytics';
-import 'firebase/database';
+import 'firebase/firestore';
 
 // config
 import firebaseConfig from './config';
 
-const initFirebase = () => {
-  console.log('firebase initialized!!');
-  console.log(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-  firebase.initializeApp(firebaseConfig);
+export const db = firebase.firestore();
 
-  const database = firebase.database();
-
-  return {
-    firebase,
-    database,
-  };
-};
-
-export default initFirebase();
+export default firebase;
