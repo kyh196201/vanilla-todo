@@ -31,7 +31,7 @@ const createTodo = async title => {
  */
 const fetchTodo = async () => {
   try {
-    const snapshot = await todoDb.get();
+    const snapshot = await todoDb.orderBy('timestamp', 'desc').get();
 
     const todos = [];
 
