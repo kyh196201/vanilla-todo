@@ -28,4 +28,26 @@ export default {
 
     return state;
   },
+
+  setFilter(state, filter) {
+    const newFilters = {
+      ...state.filters,
+      filter,
+    };
+
+    state.filters = newFilters;
+
+    return state;
+  },
+
+  setSortBy(state, sortBy) {
+    const newFilters = {
+      ...state.filters,
+      sortBy,
+    };
+
+    state.filters = newFilters;
+
+    return state;
+  },
 };

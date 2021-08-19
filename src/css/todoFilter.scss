@@ -1,0 +1,29 @@
+.todo-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.filter,
+.sort {
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    color: $filter-color;
+    letter-spacing: -0.05rem;
+
+    &.active {
+        color: $main-color;
+    }
+}
+
+.filter {
+    &:not(:last-child) {
+        margin-right: 0.25rem;
+    }
+}
+
+.sort {
+    &:not(:first-child) {
+        margin-left: 0.25rem;
+    }
+}

@@ -34,40 +34,40 @@ export default class Filters extends Component {
     this.$target.appendChild(this.$el);
   }
 
-  //   필터 아이템 템플릿
+  // 필터 아이템 템플릿
   filterItemTemplate(value) {
     const {filter} = this.$store.state.filters;
 
     const className = value === filter ? 'active' : '';
 
     return `
-        <button type="button" class="filter ${className}">
+        <button type="button" class="filter ${className}" data-value="${value}">
             ${capitalizeFirstLetter(value)}
         </button>
     `;
   }
 
-  //   정렬 아이템 템플릿
+  // 정렬 아이템 템플릿
   sortItemTemplate({title, value}) {
     const {sortBy} = this.$store.state.filters;
 
     const className = value === sortBy ? 'active' : '';
 
     return `
-        <button type="button" class="sort ${className}">
+        <button type="button" class="sort ${className}" data-value="${value}">
             ${capitalizeFirstLetter(title)}
         </button>
     `;
   }
 
-  //   필터 리스트 템플릿
+  // 필터 리스트 템플릿
   filterListTemplate() {
     return this.filterData
       .map(filter => this.filterItemTemplate(filter))
       .join('');
   }
 
-  //   정렬 리스트 템플릿
+  // 정렬 리스트 템플릿
   sortListTemplate() {
     return this.sortData.map(sort => this.sortItemTemplate(sort)).join('');
   }
@@ -77,7 +77,43 @@ export default class Filters extends Component {
     this.$sortList.innerHTML = this.sortListTemplate();
   }
 
-  bindEvents() {}
+  handleClickFilter(e) {
+    const $target = e.target;
+    const $filterBtn = $target.closest('.filter');
+
+    if (!$filterBtn) return false;
+
+    const {value} = $filterBtn.dataset;
+
+    // mutation
+    this.$store.commit('setFilter', value);
+    this.$store.dispatch('fetchTodos');
+    return true;
+  }
+
+  handleClickSort(e) {
+    const $target = e.target;
+    const $sortBtn = $target.closest('.sort');
+
+    if (!$sortBtn) return false;
+
+    const {value} = $sortBtn.dataset;
+
+    // mutation
+    this.$store.commit('setSortBy', value);
+    this.$store.dispatch('fetchTodos');
+    return true;
+  }
+
+  bindEvents() {
+    // 필터 클릭 이벤트
+    this.$filterList.addEventListener(
+      'click',
+      this.handleClickFilter.bind(this),
+    );
+    // 정렬 클릭 이벤트
+    this.$sortList.addEventListener('click', this.handleClickSort.bind(this));
+  }
 }
 
 /**
