@@ -2,6 +2,7 @@
 import TodoList from 'Components/TodoList';
 import TodoInput from 'Components/TodoInput';
 import TodoCount from 'Components/TodoCount';
+import Filters from 'Components/Filters';
 import Tabs from 'Components/Tabs';
 import TodoDate from 'Components/TodoDate';
 import LoadingView from 'Components/LoadingView';
@@ -93,6 +94,12 @@ export default class App {
 
     // TodoCount
     this.$todoCount = new TodoCount({
+      $target: this.$todoContent,
+      store: this.$store || null,
+    });
+
+    // Filters + sort
+    this.$todoFilter = new Filters({
       $target: this.$todoContent,
       store: this.$store || null,
     });
