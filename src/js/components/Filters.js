@@ -9,11 +9,11 @@ export default class Filters extends Component {
     this.sortData = [
       {
         title: 'oldest',
-        value: 'desc',
+        value: 'asc',
       },
       {
         title: 'newest',
-        value: 'asc',
+        value: 'desc',
       },
     ];
   }
