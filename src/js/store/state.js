@@ -1,5 +1,5 @@
 export default {
-  date: new Date(),
+  date: new Date().setHours(0, 0, 0, 0),
   // todo data
   todoData: [],
 

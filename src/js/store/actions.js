@@ -15,9 +15,13 @@ export default {
     context.dispatch('startLoading');
 
     // filter, sort
-    const {filters} = context.state;
+    const {date, filters} = context.state;
+    const filter = {
+      ...filters,
+      date,
+    };
 
-    const result = await api.fetchTodo(filters);
+    const result = await api.fetchTodo(filter);
 
     context.commit('setTodos', result);
     context.dispatch('stopLoading');

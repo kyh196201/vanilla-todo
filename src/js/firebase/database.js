@@ -3,6 +3,25 @@ import {db} from './index';
 
 const todoDb = db.collection('todos');
 
+// 필터에 따라서 쿼리 생성
+const createQuery = (docRef, filters) => {
+  const {date, filter, sortBy} = filters;
+
+  let query = docRef;
+
+  if (filter === 'completed') {
+    query = query.where('isCompleted', '==', true);
+  } else if (filter === 'active') {
+    query = query.where('isCompleted', '==', false);
+  }
+
+  // FIXME: 달력 개발전 주석 처리
+  // query = query.where('timestamp', '>=', date);
+  query = query.orderBy('timestamp', sortBy);
+
+  return query;
+};
+
 /**
  * create todo item
  * @param {string} title
@@ -29,11 +48,11 @@ const createTodo = async title => {
  * fetch todo list
  * @returns array
  */
-const fetchTodo = async (filters = {}) => {
+const fetchTodo = async filters => {
   try {
-    const sortBy = filters.sortBy ?? 'desc';
+    const query = createQuery(todoDb, filters);
 
-    const snapshot = await todoDb.orderBy('timestamp', sortBy).get();
+    const snapshot = await query.get();
 
     const todos = [];
 
